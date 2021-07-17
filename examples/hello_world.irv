@@ -1,0 +1,5 @@
+let main () =
+   let greeting: byte^ in %eax = "Hello, World"
+   WriteString greeting
+
+"let" " " "main" "(" ")" "=" "\n" "   " "let" " "
