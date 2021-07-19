@@ -5,6 +5,7 @@
    </PropertyGroup>
    <ItemGroup>
       <Compile Include="src/tokenizer.fs" />
+      <Compile Include="src/lexer.fs" />
       <Compile Include="src/main.fs" />
    </ItemGroup>
 </Project>

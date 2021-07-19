@@ -1,0 +1,1 @@
+[let][ ][main][ ][(][)][ ][=][lf][ ][ ][ ][let][ ][greeting][:][ ][byte][^][ ][in][ ][%][eax][ ][=][ ]["][Hello][,][ ][World]["][lf][ ][ ][ ][WriteString][ ][greeting][lf]
