@@ -1,6 +1,6 @@
 open System.IO
 
-let helloWorld = __SOURCE_DIRECTORY__ + "/../examples/hello_world.irv"
+let helloWorld = __SOURCE_DIRECTORY__ + "/../examples/hello_world.vyd"
 
 let tokens =
    helloWorld
@@ -20,4 +20,4 @@ let lexemes =
    |> Lexer.lex
 
 for lexeme in lexemes do
-   printf "%s, " (lexeme.ToString())
+   printf "[%s]" (lexeme.ToString())

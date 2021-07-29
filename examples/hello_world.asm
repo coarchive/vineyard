@@ -2,16 +2,12 @@
 .model flat, stdcall
 option casemap: none
 
-include <Irvine32.inc>
-includelib <Irvine32.Lib>
-
 .data
-   $irv_greeting byte "Hello, World", 0
-   $irv_greeting$length dword 12
+   $vyd_s byte "Hello, World", 0
 
 .code
-.main:
-   mov edx, offset $irv_greeting
-   call WriteString
-   invoke ExitProcess, 0
+   .main:
+      mov edx, offset $vyd_s
+      invoke GetStdHandle, STD_OUTPUT_HANDLE
+      invoke ExitProcess, 0
 end main

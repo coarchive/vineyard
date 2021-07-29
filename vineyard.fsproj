@@ -4,8 +4,10 @@
       <TargetFramework>net5.0</TargetFramework>
    </PropertyGroup>
    <ItemGroup>
+      <Compile Include="src/shared.fs" />
       <Compile Include="src/tokenizer.fs" />
       <Compile Include="src/lexer.fs" />
+      <Compile Include="src/parser.fs" />
       <Compile Include="src/main.fs" />
    </ItemGroup>
 </Project>

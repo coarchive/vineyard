@@ -1,0 +1,15 @@
+enum Sizes = {
+   8;
+   16;
+   32;
+};
+
+fn(const) both_m[T1, T2] -> bool {
+   return (T1 is m) and (T2 is m);
+}
+
+fn(constexpr) add['S: Sizes]
+(dest: reg['S] | m['S], source: reg['S] | imm['S] | m['S]) -> whole(dest)
+where both_m[type(dest), type(source)]() {
+   mnemonic("add", dest, source);
+}

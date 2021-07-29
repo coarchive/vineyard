@@ -1,4 +1,5 @@
 module Lexer
+open Shared
 open System.Text
 open System.Collections.Generic
 
@@ -15,6 +16,7 @@ type Lexeme =
    | In
    | Percent
    | String of string
+   | Open
 
 type LexerState =
    | Normal
@@ -27,47 +29,50 @@ let lex (input: string array): Lexeme List =
    let out = List<Lexeme>()
 
    let state  = Stack<LexerState>()
-   let levels = Stack<uint>()
+   let levels = Stack<int>()
+   let mutable currentLevel = 0
 
    let mutable i = 0
 
    state.Push Normal
-   levels.Push 0u
+   levels.Push -1
 
    while i < input.Length do
       match state.Peek() with
       | Normal ->
          let token = input.[i]
          match token with
-         | "let" -> out.Add Let
-         | " "   -> ()
-         | "("   -> out.Add ParenLeft
-         | ")"   -> out.Add ParenRight
-         | "="   -> out.Add Equals
-         | "\n"  -> state.Push IndentDetect
-         | ":"   -> out.Add Colon
-         | "^"   -> out.Add Caret
-         | "in"  -> out.Add In
-         | "%"   -> out.Add Percent
-         | "\""  -> state.Push String
-         | word  -> out.Add (BareWord word)
+         | "let"  -> out.Add Let
+         | " "    -> ()
+         | "("    -> out.Add ParenLeft
+         | ")"    -> out.Add ParenRight
+         | "="    -> out.Add Equals
+         | "\n"   -> state.Push IndentDetect
+         | ":"    -> out.Add Colon
+         | "^"    -> out.Add Caret
+         | "in"   -> out.Add In
+         | "%"    -> out.Add Percent
+         | "\""   -> state.Push String
+         | "open" -> out.Add Open
+         | word   -> out.Add ^| BareWord word
          i <- i + 1
       | IndentDetect ->
-         let mutable spaceCount = 0u
+         let mutable spaceCount = 0
          while input.[i] = " " do
             i <- i + 1
-            spaceCount <- spaceCount + 1u
+            spaceCount <- spaceCount + 1
          if input.[i] <> "\n" then
-         // [ ][ ][let]...
-         //       i
-         // currently, i rests on a non-space
+            // [ ][ ][let]...
+            //       i
+            // currently, i rests on a non-space
             let lastLevel = levels.Peek()
-            if spaceCount > lastLevel then
-               levels.Push(spaceCount)
-               out.Add(Indent)
-            elif spaceCount < lastLevel then
+            if spaceCount <= lastLevel then
                levels.Pop() |> ignore
-               out.Add(Dedent)
+               out.Add Dedent
+            elif spaceCount > currentLevel then
+               levels.Push currentLevel
+               currentLevel <- spaceCount
+               out.Add Indent
          state.Pop() |> ignore
       | String ->
          let workingString = StringBuilder()
@@ -75,7 +80,7 @@ let lex (input: string array): Lexeme List =
             workingString.Append input.[i] |> ignore
             i <- i + 1
          // currently, i rests on the end quote
-         out.Add(Lexeme.String (workingString.ToString()))
+         out.Add ^| Lexeme.String ^| workingString.ToString()
          i <- i + 1
          state.Pop() |> ignore
    out
