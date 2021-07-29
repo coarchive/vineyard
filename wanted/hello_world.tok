@@ -1,0 +1,1 @@
+[fn][ ][main][ ][{][lf][ ][ ][ ][let][ ][s][:][ ][byte][^][ ][in][ ][ebx][ ][=][ ]["][Hello][,][ ][World\0]["][;][lf][ ][ ][ ][let][ ][hStdout][:][ ][HANDLE][ ][in][ ][eax][ ][=][ ][GetStdHandle][(][STD_OUTPUT_HANDLE][)][;][lf][}][lf]

@@ -9,5 +9,6 @@ option casemap: none
    .main:
       mov edx, offset $vyd_s
       invoke GetStdHandle, STD_OUTPUT_HANDLE
+      invoke WriteConsole, eax, edx, 12, 0
       invoke ExitProcess, 0
 end main

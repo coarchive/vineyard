@@ -1,4 +1,0 @@
-fn main {
-   let s: byte^ in ebx = "Hello, World\0";
-   let hStdout: HANDLE in eax = GetStdHandle(STD_OUTPUT_HANDLE);
-}

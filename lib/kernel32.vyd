@@ -1,2 +1,12 @@
-extern dword STD_OUTPUT_HANDLE;
-extern fn(stdcall) GetStdHandle(nStdHandle: dword) -> HANDLE;
+intrinsic("include", "kernel32.inc");
+intrinsic("includelib", "kernel32.lib");
+newtype HANDLE = dword;
+let STD_OUTPUT_HANDLE: dword in extern;
+fn(extern, proto, stdcall) GetStdHandle(nStdHandle: dword) -> HANDLE;
+fn(extern, proto, stdcall) WriteConsole(
+   hConsoleOutput: HANDLE,
+   lpBuffer: void^,
+   charsToWrite: dword,
+   written: dword^,
+   reserved: dword^,
+) -> bool;

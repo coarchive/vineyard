@@ -1,0 +1,1 @@
+[BareWord "fn"][BareWord "main"][BraceOpen][Let][BareWord "s"][Colon][Byte][Caret][In][BareWord "ebx"][Equals][String "Hello, World\0"][BareWord ";"][Let][BareWord "hStdout"][Colon][BareWord "HANDLE"][In][BareWord "eax"][Equals][BareWord "GetStdHandle"][ParenLeft][BareWord "STD_OUTPUT_HANDLE"][ParenRight][BareWord ";"][BraceClose]

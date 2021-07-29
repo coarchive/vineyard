@@ -1,0 +1,53 @@
+File{
+   top_level_elements: [
+      Open{type: Open.Type.Builtin, name: "kernel32"},
+      Function{
+         extern: false,
+         name: "main",
+         params: [],
+         return: Holo.Void,
+         instructions: [
+            Binding{
+               name: "s",
+               holo: {
+                  type: Holo.Type.Ptr(Holo.Type.Primitive.Byte),
+                  storage: Holo.Storage.Register.EBX,
+               },
+               equals: StringLiteral("Hello, World"),
+            },
+            Binding{
+               name: "hStdout",
+               holo: {
+                  type: Holo.Type.Other(Bound("HANDLE")),
+                  storage: Holo.Storage.Register.EAX,
+               },
+               equals: FunctionCall{
+                  name: "GetStdHandle",
+                  args: [Bound("STD_OUTPUT_HANDLE")],
+               },
+            },
+            Binding{
+               name: "written",
+               holo: {
+                  type: Holo.Type.Primitive.Dword,
+                  storage: Holo.Storage.AllocateOnStack,
+               },
+               equals: AllocateOnly,
+            },
+            FunctionCall{
+               name: "WriteConsole",
+               args: [
+                  Bound("hStdout"),
+                  Bound("s"),
+                  FunctionCall{
+                     name: "strlen",
+                     args: [Bound("s")],
+                  },
+                  AddressOf(Bound("s")),
+                  LiteralIntegral(0),
+               ],
+            },
+         ]
+      }
+   ]
+}

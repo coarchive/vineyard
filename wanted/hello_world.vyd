@@ -1,0 +1,8 @@
+open "kernel32";
+
+fn main {
+   let s: byte^ in ebx = "Hello, World";
+   let hStdout: HANDLE in eax = GetStdHandle(STD_OUTPUT_HANDLE);
+   let written: dword in stack;
+   WriteConsole(hStdout, s, strlen(s), &written, 0);
+}

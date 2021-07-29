@@ -1,0 +1,64 @@
+File{
+   top_level_elements: [
+      Intrinsic{
+         type: Intrinsic.Include,
+         path: "kernel32.inc",
+      },
+      Intrinsic{
+         type: Intrinsic.IncludeLib,
+         path: "kernel32.lib",
+      },
+      NewType{
+         name: "HANDLE",
+         underlaying: Holo.Type.Primitive.Dword,
+      },
+      Binding{
+         type: Binding.Variable,
+         name: "STD_OUTPUT_HANDLE",
+         holo: {
+            type: Holo.Type.Primitive.Dword,
+            storage: Holo.Storage.Extern,
+         },
+      },
+      Function{
+         extern: true,
+         name: "GetStdHandle",
+         params: [
+            Param{
+               name: "nStdHandle",
+               holo: {
+                  type: Holo.Type.Primitive.Dword,
+                  storage: Holo.Storage.Proto,
+               },
+            },
+         ],
+         return: {
+            type: Holo.Type.Other(Bound("HANDLE")),
+            storage: Holo.Storage.Stdcall,
+         },
+      },
+      Function{
+         extern: true,
+         name: "WriteConsole",
+         params: [
+            Param{
+               name: "hConsoleOutput",
+               holo: {
+                  type: Holo.Type.Primitive.Dword,
+                  storage: Holo.Storage.Proto,
+               }
+            },
+            Param{
+               name: "lpBuffer",
+               holo: {
+                  type: Holo.Type.Ptr[Holo.Type.Void],
+                  storage: Holo.Storage.Proto,
+               },
+            },
+            Param{
+               name: "
+            }
+         ]
+      }
+   ]
+}
