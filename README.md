@@ -1,6 +1,10 @@
 # vineyard
 
-A language that compiles to masm + Irvine32.
+<img src="res/icon.png" width="100px"/>
+
+*A language that compiles to masm.*
+
+Presently not in development because I can't be bothered to finish it.
 
 ## info
 
